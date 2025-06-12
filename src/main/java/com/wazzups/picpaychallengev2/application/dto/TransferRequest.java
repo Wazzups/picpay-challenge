@@ -3,11 +3,15 @@ package com.wazzups.picpaychallengev2.application.dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TransferRequest {
     @NotNull(message = "The value can't be null")
     @Positive(message = "The value should be bigger than zero")
