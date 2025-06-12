@@ -26,6 +26,9 @@ Exception handler and validation implemented
 
 ## API Endpoints
 
+## Postman
+#### [Picpay postman](Picpay.postman_collection.json)
+
 ### POST `/transfer` Endpoint to make a transfer between users
 
 **Request**
