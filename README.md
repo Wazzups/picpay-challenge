@@ -1,6 +1,8 @@
 # PicPay Simplified – Back-end Challenge
 
-This project is a simplified implementation of a payment platform inspired by PicPay, built with Spring Boot and Java.
+This project is a simplified implementation of a payment platform inspired by PicPay, built with Spring Boot and Java. 
+
+[Picpay-challenge.md](Challenge.md)
 
 ## Technologies
 - Java 21 (Spring Boot)
