@@ -1,5 +1,6 @@
 package com.wazzups.picpaychallengev2.service;
 
+import com.wazzups.picpaychallengev2.application.dto.TransferCompleteEvent;
 import com.wazzups.picpaychallengev2.application.dto.TransferResponse;
 import com.wazzups.picpaychallengev2.application.exception.InsufficientBalanceException;
 import com.wazzups.picpaychallengev2.application.exception.UnauthorizedTransferException;
@@ -15,31 +16,23 @@ import com.wazzups.picpaychallengev2.domain.repository.TransactionRepository;
 import com.wazzups.picpaychallengev2.domain.repository.UserRepository;
 import com.wazzups.picpaychallengev2.domain.repository.WalletRepository;
 import com.wazzups.picpaychallengev2.infra.service.AuthorizerClient;
-import com.wazzups.picpaychallengev2.infra.service.NotificationClient;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class TransferService {
 
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
     private final TransactionRepository transactionRepository;
     private final AuthorizerClient authorizerClient;
-    private final NotificationClient notificationClient;
+    private final ApplicationEventPublisher publisher;
     private final TransactionMapper transactionMapper;
-
-    public TransferService(UserRepository userRepository, WalletRepository walletRepository, TransactionRepository transactionRepository, AuthorizerClient authorizerClient,
-        NotificationClient notificationClient, TransactionMapper transactionMapper) {
-        this.userRepository = userRepository;
-        this.walletRepository = walletRepository;
-        this.transactionRepository = transactionRepository;
-        this.authorizerClient = authorizerClient;
-        this.notificationClient = notificationClient;
-        this.transactionMapper = transactionMapper;
-    }
 
     @Transactional
     public TransferResponse executeTransfer(BigDecimal value, Long payerId, Long payeeId){
@@ -52,7 +45,7 @@ public class TransferService {
         Wallet payerWallet = walletRepository.findByUserId(payer.getId()).orElseThrow(() -> new WalletNotFoundException("Payer wallet not found"));
         Wallet payeeWallet = walletRepository.findByUserId(payee.getId()).orElseThrow(() -> new WalletNotFoundException("Payee wallet not found"));
 
-        if (payeeWallet.getBalance().compareTo(value) < 0)
+        if (payerWallet.getBalance().compareTo(value) < 0)
             throw new InsufficientBalanceException("Payer don't have enough balance");
 
         authorizerClient.authorize();
@@ -61,6 +54,8 @@ public class TransferService {
         payeeWallet.setBalance(payeeWallet.getBalance().add(value));
 
         TransactionRecord transactionSaved = transactionRepository.save(new TransactionRecord(payer, payee, value, LocalDateTime.now(), TransactionStatus.COMPLETED));
+
+        publisher.publishEvent(new TransferCompleteEvent(transactionSaved.getId(), payeeId, value));
 
         return transactionMapper.toResponse(transactionSaved);
     }

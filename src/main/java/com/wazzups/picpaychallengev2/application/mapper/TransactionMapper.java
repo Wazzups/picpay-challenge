@@ -5,7 +5,7 @@ import com.wazzups.picpaychallengev2.domain.model.TransactionRecord;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TransactionMapper {
 
     @Mapping(source = "amount", target = "amount")

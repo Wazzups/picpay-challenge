@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class AuthorizerClient {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     private final String authorizerUrl;
 
     public AuthorizerClient(RestTemplate restTemplate, @Value("${external-services.authorize-url}") String authorizerUrl) {
