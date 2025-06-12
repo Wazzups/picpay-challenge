@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:picpaydb;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+external-service:
+  authorize-url: https://run.mocky.io/v3/2d297b27-08ae-4d32-9057-7eeb9cfee1b2
+  notification-url: https://run.mocky.io/v3/b0e63c7e-0c8b-4ab5-ab08-50818db67d1c
+
+server:
+  port: 8080
