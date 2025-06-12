@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface TransactionMapper {
 
-    @Mapping(source = "id", target = "transactionId")
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "payer.id", target = "payerId")
     @Mapping(source = "payee.id", target = "payeeId")

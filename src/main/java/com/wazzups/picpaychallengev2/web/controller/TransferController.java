@@ -2,7 +2,7 @@ package com.wazzups.picpaychallengev2.web.controller;
 
 import com.wazzups.picpaychallengev2.application.dto.TransferRequest;
 import com.wazzups.picpaychallengev2.application.dto.TransferResponse;
-import com.wazzups.picpaychallengev2.infra.service.TransferService;
+import com.wazzups.picpaychallengev2.service.TransferService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

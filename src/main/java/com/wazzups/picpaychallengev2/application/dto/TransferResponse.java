@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class TransferResponse {
-    private Long transactionId;
     private BigDecimal amount;
     private Long payerId;
     private Long payeeId;

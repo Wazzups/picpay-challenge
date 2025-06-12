@@ -1,4 +1,4 @@
-package com.wazzups.picpaychallengev2.infra.service;
+package com.wazzups.picpaychallengev2.service;
 
 import com.wazzups.picpaychallengev2.application.dto.TransferResponse;
 import com.wazzups.picpaychallengev2.application.exception.InsufficientBalanceException;
@@ -14,8 +14,8 @@ import com.wazzups.picpaychallengev2.domain.model.Wallet;
 import com.wazzups.picpaychallengev2.domain.repository.TransactionRepository;
 import com.wazzups.picpaychallengev2.domain.repository.UserRepository;
 import com.wazzups.picpaychallengev2.domain.repository.WalletRepository;
-import com.wazzups.picpaychallengev2.service.AuthorizerClient;
-import com.wazzups.picpaychallengev2.service.NotificationClient;
+import com.wazzups.picpaychallengev2.infra.service.AuthorizerClient;
+import com.wazzups.picpaychallengev2.infra.service.NotificationClient;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.wazzups.picpaychallengev2.service;
+package com.wazzups.picpaychallengev2.infra.service;
 
 import com.wazzups.picpaychallengev2.application.exception.ExternalServiceException;
 import com.wazzups.picpaychallengev2.application.exception.UnauthorizedTransferException;
@@ -16,7 +16,7 @@ public class AuthorizerClient {
     private RestTemplate restTemplate;
     private final String authorizerUrl;
 
-    public AuthorizerClient(RestTemplate restTemplate, @Value("${external-service.authorize-url}") String authorizerUrl) {
+    public AuthorizerClient(RestTemplate restTemplate, @Value("${external-services.authorize-url}") String authorizerUrl) {
         this.restTemplate = restTemplate;
         this.authorizerUrl = authorizerUrl;
     }

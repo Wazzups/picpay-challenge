@@ -1,4 +1,4 @@
-package com.wazzups.picpaychallengev2.service;
+package com.wazzups.picpaychallengev2.infra.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class NotificationClient {
 
     @Autowired
     public NotificationClient(RestTemplate restTemplate,
-        @Value("${external-services.notifier-url}") String notifierUrl) {
+        @Value("${external-services.notification-url}") String notifierUrl) {
         this.restTemplate = restTemplate;
         this.notifierUrl = notifierUrl;
     }

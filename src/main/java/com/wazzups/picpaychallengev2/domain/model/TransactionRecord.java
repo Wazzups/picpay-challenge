@@ -45,7 +45,7 @@ public class TransactionRecord {
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, length = 10)
-    private TransactionStatus status;
+    private TransactionStatus status = TransactionStatus.PENDING;
 
     public TransactionRecord(User payer, User payee, BigDecimal amount, LocalDateTime timestamp, TransactionStatus status) {
         this.payer = payer;
